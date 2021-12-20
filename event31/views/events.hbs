@@ -1,0 +1,61 @@
+<div class="container">
+	<section class="events-section">
+		<h1 class="center-align">События</h1>
+	<ul class="event__cards ">
+		{{#if events.length}}
+			{{#each events}}
+				<li class="event__card card hoverable">
+					<div class="card-image waves-effect waves-block waves-light">
+						<img class="img" src="/images/{{img}}" alt="{{title}}">
+					</div>
+					<div class="card-content ">
+					<span class="card-title activator grey-text text-darken-4">{{title}}<i
+							class="material-icons right">more_vert</i></span>
+						<p>Начало в <strong>{{time}}</strong></p>
+						<p>Дата события : <strong>{{date}}</strong></p>
+						<p>Цена : <strong>{{price}} руб.</strong></p>
+					</div>
+					<div class="card-reveal event-description">
+						<div class="wrap-event-desc">
+							<div class="desc-content">
+								<span class="card-title grey-text text-darken-4">{{title}}<i
+										class="material-icons right">close</i></span>
+								<p>{{description}}</p>
+							</div>
+{{!--							<div class="event-price">--}}
+{{!--								<p class="price">{{price}}</p>--}}
+{{!--							</div>--}}
+							<div class="card__buttons-box">
+							<ul class="card__buttons-list">
+								<li class="card__buttons-item"><a class="waves-effect waves-orange btn-flat btn-small "
+																                                  href="/events/{{id}}" target="_blank">Открыть</a></li>
+								{{#if @root.isAuth}}
+									{{#ifeq userId._id @root.userId}}
+										<li class="card__buttons-item"><a class="waves-effect waves-orange btn-flat btn-small "
+										                                  href="/events/{{id}}/edit?allow=true">Редактировать</a></li>
+									{{/ifeq}}
+									<li class="card__buttons-item">
+										<form action="/card/add" method="POST">
+											<input type="hidden" name="_csrf" value="{{@root.csrf}}">
+											<input type="hidden" name="id" value="{{id}}">
+											<button type="submit" class="btn 03a9f4 btn-small light-blue waves-effect waves-light">Купить
+											</button>
+										</form>
+									</li>
+								</ul>
+								{{/if}}
+							</div>
+						</div>
+					</div>
+				</li>
+			{{/each}}
+		</ul>
+		{{else}}
+			<p>Курсов пока нет</p>
+		{{/if}}
+	</section>
+</div>
+
+
+
+

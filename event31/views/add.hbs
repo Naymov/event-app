@@ -1,0 +1,53 @@
+<div class="container">
+	<section class="add-section">
+		<h1 class="center-align">Добавить событие</h1>
+		{{#if error}}
+			<p class="alert">{{error}}</p>
+		{{/if}}
+
+		<form action="/add" method="POST" novalidate enctype="multipart/form-data">
+			<div class="input-field">
+				<input id="title" name="title" type="text" class="validate" required value="{{data.title}}">
+				<label for="title">Название события</label>
+				<span class="helper-text" data-error="Введите название"></span>
+			</div>
+
+			<div class="input-field">
+				<input id="date" name="date" type="text" class="datepicker validate" required value="{{data.date}}">
+				<label for="date">Укажите дату мероприятия</label>
+				<span class="helper-text" data-error="Неверная дата"></span>
+			</div>
+
+			<div class="input-field">
+				<input id="time" name="time" type="text" class="timepicker validate" required value="{{data.time}}">
+				<label for="time">Укажите время начала мероприятия</label>
+				<span class="helper-text" data-error="Неверное время"></span>
+			</div>
+
+			<div id="priceBlock" class="input-field priceBlock">
+				<input id="price" name="price" type="number" class="validate" min="0" value="{{data.price}}">
+				<label for="price">Цена входа</label>
+				<span class="helper-text" data-error="Введите цену"></span>
+			</div>
+
+			<div class="input-field">
+				<textarea id="description" name="description">{{data.description}}</textarea>
+				<label for="description">Добавьте описание события</label>
+			</div>
+
+			<div class="file-field input-field">
+				<div class="btn green waves-effect waves-light">
+					<span>Загрузить фото</span>
+					<input type="file" name="img">
+				</div>
+				<div class="file-path-wrapper">
+					<input class="file-path validate" type="text" disabled>
+				</div>
+			</div>
+
+			<input type="hidden" name="_csrf" value="{{csrf}}">
+
+			<button class="btn #03a9f4 light-blue waves-effect waves-light add-btn">Добавить событие</button>
+		</form>
+	</section>
+</div>
